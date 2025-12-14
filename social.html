@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="utf-8">
+  <title>Sosyal - Burak</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body style="--bg-url: url('1.jpg.png')">
+
+<header class="header container">
+  <div class="navbar">
+    <div class="brand"><div class="logo">BG</div></div>
+    <nav class="nav-links">
+      <a href="index.html">Ana Sayfa</a>
+      <a href="about.html">Hakkımda</a>
+      <a href="projects.html">Projeler</a>
+      <a href="social.html">Sosyal</a>
+      <a href="contact.html">İletişim</a>
+    </nav>
+    <button class="hamburger">☰</button>
+  </div>
+</header>
+
+<main>
+
+  <section class="hero">
+    <h1 class="title">Sosyal</h1>
+    <p class="subtitle">Beni takip edebileceğin platformlar</p>
+  </section>
+
+  <section class="content-box social-box">
+
+    <button class="social-btn" onclick="toggleLink(https://www.instagram.com/burak.gltkn27?igsh=MW1lNDY1cHVtOW1keQ==)">
+      Instagram
+      <span class="social-link">@burak</span>
+    </button>
+
+    <button class="social-btn" onclick="toggleLink(this)">
+      GitHub
+      <span class="social-link">github.com/burak</span>
+    </button>
+
+    <button class="social-btn" onclick="toggleLink(this)">
+      LinkedIn
+      <span class="social-link">linkedin.com/in/burak</span>
+    </button>
+
+    <button class="social-btn" onclick="toggleLink(this)">
+      YouTube
+      <span class="social-link">youtube.com/@burak</span>
+    </button>
+
+  </section>
+
+</main>
+
+<footer class="footer container">© 2025 Burak</footer>
+
+<script>
+function toggleLink(btn){
+  btn.classList.toggle("open");
+}
+</script>
+
+</body>
+</html>
