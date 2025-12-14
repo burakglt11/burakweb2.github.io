@@ -1,154 +1,218 @@
-/* =========================
-   style.css — MOBILE FIXED
-   ========================= */
+/* =======================================
+ * 📝 style.css — MOBİL UYUMLU VE OPTİMİZE EDİLMİŞ
+ * ======================================= */
 
-/* --------- Root --------- */
-:root{
-  --accent-1:#4f8cff;
-  --accent-2:#2fd3c6;
-  --panel:rgba(15,23,36,.78);
-  --glass:rgba(15,23,36,.55);
-  --muted:rgba(255,255,255,.88);
-  --overlay:rgba(0,0,0,.62);
-  --max-width:1100px;
-  --page-padding:20px;
+/* --------- Root Variables (Kök Değişkenler) --------- */
+:root {
+  /* Renk Paleti */
+  --color-primary: #0f1724; /* Ana Arka Plan */
+  --color-secondary: #fff;  /* Ana Metin */
+  --accent-1: #4f8cff;      /* Mavi Vurgu */
+  --accent-2: #2fd3c6;      /* Turkuaz Vurgu */
+
+  /* Yüzeyler */
+  --panel: rgba(15, 23, 36, 0.9);   /* Panel (Hafif Şeffaf) */
+  --glass: rgba(15, 23, 36, 0.75);  /* Cam Efekti (Daha Şeffaf) */
+  --header-bg: rgba(8, 12, 20, 0.85); /* Header Arka Planı */
+  --muted: rgba(255, 255, 255, 0.88); /* Soluk Metin */
+  --overlay: rgba(0, 0, 0, 0.62);     /* Arka Plan Gölgesi */
+
+  /* Boyutlar */
+  --max-width: 1100px;
+  --page-padding: 20px;
+  --header-height: 72px; /* Tahmini Header Yüksekliği */
+  --border-radius: 10px;
 }
 
-/* --------- RESET --------- */
-*{box-sizing:border-box;margin:0;padding:0}
-html{height:auto}
-body{
-  min-height:100vh;
-  overflow-y:auto;
-  font-family:Inter,"Segoe UI",Roboto,Arial,sans-serif;
-  color:#fff;
-  background:#0f1724;
+/* --------- RESET ve TEMEL STİLLER --------- */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+html {
+  scroll-behavior: smooth;
+}
+body {
+  min-height: 100vh;
+  overflow-x: hidden; /* Yatay kaymayı engeller */
+  font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+  color: var(--color-secondary);
+  background: var(--color-primary);
 }
 
-/* --------- BACKGROUND (MOBILE SAFE) --------- */
-body::before{
-  content:"";
-  position:absolute;   /* ❗ FIXED DEĞİL */
-  inset:0;
-  background:url("1.jpg.png") center/cover no-repeat;
-  z-index:-10;
+/* 🏞️ Arka Plan (Mobile Safe / Masaüstü Fixed) */
+body::before {
+  content: "";
+  position: absolute; /* MOBİL: Kayma/titreme yapmaz */
+  inset: 0;
+  background: url("1.jpg.png") center/cover no-repeat;
+  z-index: -10;
+}
+body::after {
+  content: "";
+  position: absolute; /* MOBİL: Overlay de arka planla birlikte kayar */
+  inset: 0;
+  background: var(--overlay);
+  z-index: -5;
 }
 
-body::after{
-  content:"";
-  position:absolute;   /* ❗ FIXED DEĞİL */
-  inset:0;
-  background:var(--overlay);
-  z-index:-5;
+/* Masaüstünde Arka Planı Sabitleme */
+@media (min-width: 881px) {
+  body::before, body::after {
+    position: fixed; /* MASAÜSTÜ: Sabit kalır (parallax benzeri etki) */
+  }
 }
 
 /* --------- CONTAINER --------- */
-.container{
-  width:min(var(--max-width),96%);
-  margin:auto;
-  padding:var(--page-padding);
-  position:relative;
-  z-index:5;
+.container {
+  width: min(var(--max-width), 100% - calc(2 * var(--page-padding))); /* Kenarlardan boşluk bırakır */
+  margin: 0 auto;
+  position: relative;
+  z-index: 5;
 }
 
-/* --------- HEADER --------- */
-.header{
-  position:sticky;
-  top:0;
-  z-index:999;
-  background:rgba(8,12,20,.85);
-  backdrop-filter:blur(10px);
+/* --------- HEADER (Yapışkan Başlık) --------- */
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 999;
+  background: var(--header-bg);
+  backdrop-filter: blur(10px);
+  min-height: var(--header-height); /* Yüksekliği garanti eder */
 }
 
-/* --------- NAV --------- */
-.navbar{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  padding:14px 0;
+/* --------- NAV (Gezinme Çubuğu) --------- */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 14px 0;
 }
 
-.logo{
-  width:44px;
-  height:44px;
-  border-radius:10px;
-  background:linear-gradient(135deg,var(--accent-1),var(--accent-2));
-  display:grid;
-  place-items:center;
-  font-weight:800;
+.logo {
+  width: 44px;
+  height: 44px;
+  border-radius: var(--border-radius);
+  background: linear-gradient(135deg, var(--accent-1), var(--accent-2));
+  display: grid;
+  place-items: center;
+  font-weight: 800;
+  color: var(--color-secondary);
+  text-decoration: none;
+  flex-shrink: 0; /* Küçülmesini engeller */
 }
 
-/* --------- NAV LINKS --------- */
-.nav-links{display:flex;gap:18px}
-.nav-links a{
-  color:#fff;
-  text-decoration:none;
-  padding:8px 12px;
-  border-radius:8px;
+/* --------- NAV LINKS (Masaüstü Menüsü) --------- */
+.nav-links {
+  display: flex;
+  gap: 20px;
+}
+.nav-links a {
+  color: var(--color-secondary);
+  text-decoration: none;
+  padding: 8px 12px;
+  border-radius: var(--border-radius);
+  transition: background 0.2s ease;
+}
+.nav-links a:hover {
+  background: var(--glass);
 }
 
-/* --------- HAMBURGER --------- */
-.hamburger{
-  display:none;
-  background:none;
-  border:none;
-  color:#fff;
-  font-size:22px;
+/* --------- HAMBURGER (Mobil Tetikleyici) --------- */
+.hamburger {
+  display: none;
+  background: none;
+  border: none;
+  color: var(--color-secondary);
+  font-size: 24px; /* Boyut artırıldı */
+  cursor: pointer;
+  padding: 8px;
 }
 
-/* --------- MOBILE MENU --------- */
-.mobile-menu{
-  display:none;
-  position:absolute;
-  right:16px;
-  top:70px;
-  background:#0b1220;
-  padding:12px;
-  border-radius:12px;
-  z-index:9999;
+/* --------- MOBİL MENU --------- */
+.mobile-menu {
+  display: none;
+  position: absolute;
+  /* inset-inline-end modern bir kullanımdır, 'right' yerine kullanılabilir */
+  right: var(--page-padding); 
+  top: var(--header-height); /* Header'ın hemen altına konumlandırılır */
+  background: var(--color-primary);
+  padding: 12px;
+  border-radius: var(--border-radius);
+  z-index: 9999;
+  min-width: 200px;
+  max-width: calc(100% - 2 * var(--page-padding)); /* Ekranı aşmasını engeller */
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4);
 }
-.mobile-menu.open{display:block}
-.mobile-menu a{
-  display:block;
-  padding:10px;
-  color:#fff;
-  text-decoration:none;
+.mobile-menu.open {
+  display: block;
 }
-
-/* --------- HERO --------- */
-.hero{
-  padding:80px 0 30px;
-  text-align:center;
+.mobile-menu a {
+  display: block;
+  padding: 12px;
+  color: var(--color-secondary);
+  text-decoration: none;
+  border-radius: 6px;
+  transition: background 0.2s ease;
 }
-.hero h1{
-  font-size:clamp(28px,6vw,48px);
-  font-weight:900;
-}
-.hero p{
-  margin-top:12px;
-  color:var(--muted);
+.mobile-menu a:hover {
+  background: var(--panel);
 }
 
-/* --------- CONTENT BOX --------- */
-.content-box{
-  background:var(--panel);
-  backdrop-filter:blur(10px);
-  border-radius:14px;
-  padding:26px;
-  margin:30px auto;
-  max-width:980px;
+/* --------- HERO (Ana Başlık Bölümü) --------- */
+.hero {
+  padding: 80px 0 50px;
+  text-align: center;
+}
+.hero h1 {
+  font-size: clamp(32px, 7vw, 60px); /* Daha dinamik font boyutu */
+  font-weight: 900;
+  line-height: 1.2;
+}
+.hero p {
+  margin-top: 14px;
+  color: var(--muted);
+  font-size: 1.1rem;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* --------- CONTENT BOX (İçerik Kutusu) --------- */
+.content-box {
+  background: var(--panel);
+  backdrop-filter: blur(10px);
+  border-radius: 14px;
+  padding: 30px; /* Daha fazla padding */
+  margin: 30px auto;
+  max-width: 980px;
+  border: 1px solid rgba(255, 255, 255, 0.08); /* Hafif border eklendi */
 }
 
 /* --------- FOOTER --------- */
-.footer{
-  text-align:center;
-  padding:24px 0;
-  color:rgba(255,255,255,.8);
+.footer {
+  text-align: center;
+  padding: 30px 0; /* Daha fazla padding */
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 0.9rem;
 }
 
-/* --------- MOBILE --------- */
-@media(max-width:880px){
-  .nav-links{display:none}
-  .hamburger{display:block}
-}
+/* =======================================
+ * 📱 MOBİL MEDYA SORGUSU
+ * ======================================= */
+@media(max-width: 880px) {
+  /* Masaüstü menüsünü gizle */
+  .nav-links {
+    display: none;
+  }
+  /* Hamburger menüyü göster */
+  .hamburger {
+    display: block;
+  }
 
+  /* Mobil cihazlarda sayfa padding'ini biraz azaltabiliriz */
+  :root {
+    --page-padding: 16px; 
+  }
+}
