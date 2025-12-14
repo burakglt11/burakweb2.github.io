@@ -1,218 +1,263 @@
-/* =======================================
- * 📝 style.css — MOBİL UYUMLU VE OPTİMİZE EDİLMİŞ
- * ======================================= */
+/* =========================
+   style.css — FINAL MOBILE SAFE
+   ========================= */
 
-/* --------- Root Variables (Kök Değişkenler) --------- */
-:root {
-  /* Renk Paleti */
-  --color-primary: #0f1724; /* Ana Arka Plan */
-  --color-secondary: #fff;  /* Ana Metin */
-  --accent-1: #4f8cff;      /* Mavi Vurgu */
-  --accent-2: #2fd3c6;      /* Turkuaz Vurgu */
+/* --------- Root / Variables --------- */
+:root{
+  --accent-1: #4f8cff;     /* soft mavi */
+  --accent-2: #2fd3c6;     /* turkuaz */
 
-  /* Yüzeyler */
-  --panel: rgba(15, 23, 36, 0.9);   /* Panel (Hafif Şeffaf) */
-  --glass: rgba(15, 23, 36, 0.75);  /* Cam Efekti (Daha Şeffaf) */
-  --header-bg: rgba(8, 12, 20, 0.85); /* Header Arka Planı */
-  --muted: rgba(255, 255, 255, 0.88); /* Soluk Metin */
-  --overlay: rgba(0, 0, 0, 0.62);     /* Arka Plan Gölgesi */
+  --panel: rgba(10,16,26,0.88);   /* daha koyu panel */
+  --glass: rgba(10,16,26,0.72);
 
-  /* Boyutlar */
+  --muted: rgba(255,255,255,0.9);
+  --overlay: rgba(0,0,0,0.68);
+
   --max-width: 1100px;
   --page-padding: 20px;
-  --header-height: 72px; /* Tahmini Header Yüksekliği */
-  --border-radius: 10px;
 }
 
-/* --------- RESET ve TEMEL STİLLER --------- */
-*, *::before, *::after {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
+/* --------- Reset --------- */
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{
+  min-height:100%;
+  overflow-x:hidden;
 }
-html {
-  scroll-behavior: smooth;
-}
-body {
-  min-height: 100vh;
-  overflow-x: hidden; /* Yatay kaymayı engeller */
-  font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
-  color: var(--color-secondary);
-  background: var(--color-primary);
+body{
+  font-family: Inter, "Segoe UI", Roboto, Arial, sans-serif;
+  -webkit-font-smoothing:antialiased;
+  color:#fff;
+  background:#0f1724;
 }
 
-/* 🏞️ Arka Plan (Mobile Safe / Masaüstü Fixed) */
-body::before {
-  content: "";
-  position: absolute; /* MOBİL: Kayma/titreme yapmaz */
-  inset: 0;
-  background: url("1.jpg.png") center/cover no-repeat;
-  z-index: -10;
-}
-body::after {
-  content: "";
-  position: absolute; /* MOBİL: Overlay de arka planla birlikte kayar */
-  inset: 0;
-  background: var(--overlay);
-  z-index: -5;
+/* --------- Background --------- */
+body{
+  --bg-url: url("1.jpg.png");
+  position:relative;
 }
 
-/* Masaüstünde Arka Planı Sabitleme */
-@media (min-width: 881px) {
-  body::before, body::after {
-    position: fixed; /* MASAÜSTÜ: Sabit kalır (parallax benzeri etki) */
-  }
+body::before{
+  content:"";
+  position:fixed;
+  inset:0;
+  background-image:var(--bg-url);
+  background-size:cover;
+  background-position:center;
+  z-index:-10;
 }
 
-/* --------- CONTAINER --------- */
-.container {
-  width: min(var(--max-width), 100% - calc(2 * var(--page-padding))); /* Kenarlardan boşluk bırakır */
-  margin: 0 auto;
-  position: relative;
-  z-index: 5;
+body::after{
+  content:"";
+  position:fixed;
+  inset:0;
+  background:var(--overlay);
+  z-index:-5;
 }
 
-/* --------- HEADER (Yapışkan Başlık) --------- */
-.header {
-  position: sticky;
-  top: 0;
-  z-index: 999;
-  background: var(--header-bg);
-  backdrop-filter: blur(10px);
-  min-height: var(--header-height); /* Yüksekliği garanti eder */
+/* --------- Container --------- */
+.container{
+  width:min(var(--max-width),96%);
+  margin:0 auto;
+  padding:var(--page-padding);
 }
 
-/* --------- NAV (Gezinme Çubuğu) --------- */
-.navbar {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 14px 0;
+/* --------- HEADER --------- */
+.header{
+  position:sticky;
+  top:0;
+  z-index:9999;
+  background:rgba(6,10,18,0.92);
+  backdrop-filter:blur(12px);
+  border-bottom:1px solid rgba(255,255,255,0.08);
 }
 
-.logo {
-  width: 44px;
-  height: 44px;
-  border-radius: var(--border-radius);
-  background: linear-gradient(135deg, var(--accent-1), var(--accent-2));
-  display: grid;
-  place-items: center;
-  font-weight: 800;
-  color: var(--color-secondary);
-  text-decoration: none;
-  flex-shrink: 0; /* Küçülmesini engeller */
+.navbar{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:14px 0;
 }
 
-/* --------- NAV LINKS (Masaüstü Menüsü) --------- */
-.nav-links {
-  display: flex;
-  gap: 20px;
-}
-.nav-links a {
-  color: var(--color-secondary);
-  text-decoration: none;
-  padding: 8px 12px;
-  border-radius: var(--border-radius);
-  transition: background 0.2s ease;
-}
-.nav-links a:hover {
-  background: var(--glass);
+.brand{
+  display:flex;
+  align-items:center;
+  gap:12px;
 }
 
-/* --------- HAMBURGER (Mobil Tetikleyici) --------- */
-.hamburger {
-  display: none;
-  background: none;
-  border: none;
-  color: var(--color-secondary);
-  font-size: 24px; /* Boyut artırıldı */
-  cursor: pointer;
-  padding: 8px;
+.logo{
+  width:44px;
+  height:44px;
+  border-radius:10px;
+  background:linear-gradient(135deg,var(--accent-1),var(--accent-2));
+  display:grid;
+  place-items:center;
+  font-weight:900;
+  color:#fff;
 }
 
-/* --------- MOBİL MENU --------- */
-.mobile-menu {
-  display: none;
-  position: absolute;
-  /* inset-inline-end modern bir kullanımdır, 'right' yerine kullanılabilir */
-  right: var(--page-padding); 
-  top: var(--header-height); /* Header'ın hemen altına konumlandırılır */
-  background: var(--color-primary);
-  padding: 12px;
-  border-radius: var(--border-radius);
-  z-index: 9999;
-  min-width: 200px;
-  max-width: calc(100% - 2 * var(--page-padding)); /* Ekranı aşmasını engeller */
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4);
-}
-.mobile-menu.open {
-  display: block;
-}
-.mobile-menu a {
-  display: block;
-  padding: 12px;
-  color: var(--color-secondary);
-  text-decoration: none;
-  border-radius: 6px;
-  transition: background 0.2s ease;
-}
-.mobile-menu a:hover {
-  background: var(--panel);
+/* --------- NAV LINKS --------- */
+.nav-links{
+  display:flex;
+  gap:18px;
 }
 
-/* --------- HERO (Ana Başlık Bölümü) --------- */
-.hero {
-  padding: 80px 0 50px;
-  text-align: center;
-}
-.hero h1 {
-  font-size: clamp(32px, 7vw, 60px); /* Daha dinamik font boyutu */
-  font-weight: 900;
-  line-height: 1.2;
-}
-.hero p {
-  margin-top: 14px;
-  color: var(--muted);
-  font-size: 1.1rem;
-  max-width: 600px;
-  margin-left: auto;
-  margin-right: auto;
+.nav-links a{
+  color:#f8fafc;
+  text-decoration:none;
+  padding:8px 12px;
+  border-radius:8px;
+  font-weight:600;
 }
 
-/* --------- CONTENT BOX (İçerik Kutusu) --------- */
-.content-box {
-  background: var(--panel);
-  backdrop-filter: blur(10px);
-  border-radius: 14px;
-  padding: 30px; /* Daha fazla padding */
-  margin: 30px auto;
-  max-width: 980px;
-  border: 1px solid rgba(255, 255, 255, 0.08); /* Hafif border eklendi */
+.nav-links a:hover{
+  background:rgba(255,255,255,0.12);
+}
+
+/* --------- Hamburger --------- */
+.hamburger{
+  display:none;
+  background:none;
+  border:none;
+  font-size:24px;
+  color:#fff;
+  cursor:pointer;
+}
+
+/* --------- Mobile Menu --------- */
+.mobile-menu{
+  display:none;
+  position:fixed;
+  right:16px;
+  top:68px;
+  width:260px;
+  background:rgba(8,12,20,0.96);
+  padding:14px;
+  border-radius:14px;
+  box-shadow:0 25px 50px rgba(0,0,0,.7);
+  z-index:99999;
+}
+
+.mobile-menu.open{display:block}
+
+.mobile-menu a{
+  display:block;
+  padding:12px;
+  color:#fff;
+  text-decoration:none;
+  border-radius:10px;
+  font-weight:600;
+}
+
+.mobile-menu a:hover{
+  background:rgba(255,255,255,0.12);
+}
+
+/* --------- HERO --------- */
+.hero{
+  padding:90px 0 36px;
+  text-align:center;
+  position:relative;
+  z-index:50;
+}
+
+.hero .title{
+  font-size:clamp(30px,5vw,50px);
+  font-weight:900;
+  text-shadow:0 12px 45px rgba(0,0,0,.9);
+}
+
+.hero .subtitle{
+  margin-top:14px;
+  max-width:900px;
+  margin-inline:auto;
+  font-size:clamp(15px,2.4vw,18px);
+  color:#e5e7eb;
+}
+
+/* --------- CONTENT BOX --------- */
+.content-box{
+  max-width:980px;
+  margin:34px auto;
+  padding:28px;
+  border-radius:16px;
+  background:var(--panel);
+  backdrop-filter:blur(12px);
+  box-shadow:0 25px 55px rgba(0,0,0,.8);
+  position:relative;
+  z-index:40;
+}
+
+.content-box h2{
+  font-size:22px;
+  margin-bottom:12px;
+}
+
+.content-box p{
+  color:var(--muted);
+  line-height:1.7;
+  margin-bottom:12px;
+}
+
+/* --------- GRID / CARDS --------- */
+.grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+  gap:20px;
+}
+
+.card{
+  background:var(--glass);
+  border:1px solid rgba(255,255,255,0.08);
+  padding:20px;
+  border-radius:14px;
+}
+
+.card:hover{
+  transform:translateY(-6px);
+}
+
+/* --------- FORM --------- */
+form label{
+  margin-top:10px;
+  display:block;
+  font-weight:600;
+}
+
+input, textarea{
+  width:100%;
+  margin-top:8px;
+  padding:12px;
+  border-radius:10px;
+  border:1px solid rgba(255,255,255,0.1);
+  background:rgba(0,0,0,0.45);
+  color:#fff;
+}
+
+button[type="submit"]{
+  margin-top:16px;
+  padding:12px 18px;
+  border-radius:12px;
+  border:none;
+  font-weight:800;
+  cursor:pointer;
+  background:linear-gradient(90deg,var(--accent-1),var(--accent-2));
+  color:#fff;
 }
 
 /* --------- FOOTER --------- */
-.footer {
-  text-align: center;
-  padding: 30px 0; /* Daha fazla padding */
-  color: rgba(255, 255, 255, 0.7);
-  font-size: 0.9rem;
+.footer{
+  text-align:center;
+  padding:22px 0;
+  color:rgba(255,255,255,0.85);
+  font-size:14px;
+  position:relative;
+  z-index:50;
 }
 
-/* =======================================
- * 📱 MOBİL MEDYA SORGUSU
- * ======================================= */
-@media(max-width: 880px) {
-  /* Masaüstü menüsünü gizle */
-  .nav-links {
-    display: none;
-  }
-  /* Hamburger menüyü göster */
-  .hamburger {
-    display: block;
-  }
-
-  /* Mobil cihazlarda sayfa padding'ini biraz azaltabiliriz */
-  :root {
-    --page-padding: 16px; 
-  }
+/* --------- Responsive --------- */
+@media (max-width:880px){
+  .nav-links{display:none}
+  .hamburger{display:block}
+  .hero{padding:70px 0 26px}
 }
+
