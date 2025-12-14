@@ -289,5 +289,31 @@ a,button,input,textarea{
 /* FIX */
 .hero .reveal{
   opacity:1 !important;
-  transform:none !important;
+  transform:none !important; 
+
+    
 }
+.mobile-menu {
+  display:none;
+  position:fixed;
+  right:16px;
+  top:66px;
+  width:260px;
+  background: rgba(0,0,0,0.55);
+  backdrop-filter: blur(8px);
+  padding:12px;
+  border-radius:10px;
+  box-shadow: 0 18px 40px rgba(0,0,0,0.45);
+  z-index: 99990;
+}
+.mobile-menu.open{display:block}
+.mobile-menu a{
+  display:block;
+  color:#fff;
+  padding:10px;
+  border-radius:8px;
+  text-decoration:none;
+  margin-bottom:6px;
+}
+
+
